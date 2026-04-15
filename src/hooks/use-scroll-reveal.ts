@@ -1,0 +1,21 @@
+"use client";
+
+import { useRef } from "react";
+import { useInView, type UseInViewOptions } from "motion/react";
+
+interface ScrollRevealOptions {
+  once?: boolean;
+  margin?: UseInViewOptions["margin"];
+  amount?: UseInViewOptions["amount"];
+}
+
+export function useScrollReveal({
+  once = true,
+  margin = "0px 0px -80px 0px",
+  amount = 0.2,
+}: ScrollRevealOptions = {}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once, margin, amount });
+
+  return { ref, isInView };
+}
